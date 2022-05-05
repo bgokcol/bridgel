@@ -20,4 +20,7 @@ Edit `pairs` array to set allowed pairs for swapping. You can edit `feeMultiplie
 Lastly, you should enter the private key of (bridge contract) deployer address. Always there should be some funds in that account to cover network fees.
 
 ### Author's note:
-I used pure JS (for frontend) because I don't have any experience with external UI libraries. It may cause some confusion, in that case feel free to open an issue from Github.
+> I used pure JS (for frontend) because I don't have any experience with external UI libraries. It may cause some confusion, in that case feel free to open an issue from Github.
+
+### Disclaimer:
+The author is not responsible for any problems you encounter with the code. Do your own tests and audit before using the software in production mode.
