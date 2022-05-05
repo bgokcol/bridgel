@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= config.app.title %>
+    </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Jost:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container py-2">
+            <div class="w-100">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h1 class="navbar-brand mb-0"><i class="fas fa-coins me-4"></i>
+                            <%= config.app.title %>
+                        </h1>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-light input-2 border-0 shadow-0 d-flex align-items-center"
+                            id="connect"><i class="fas fa-wallet me-3"></i><span>Connect Wallet</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <h4 class="pb-1">
+                            <%= i18n.token %>:
+                        </h4>
+                        <select name="token" class="form-control shadow-0 input-2 mt-2">
+                            <% for( let i=0; i < config.tokens.length; i++ ) { %>
+                                <option value="<%= i %>" data-id="<%= config.tokens[i].id %>"
+                                    data-symbol="<%= config.tokens[i].symbol %>"
+                                    data-decimals="<%= config.tokens[i].decimals %>">
+                                    <%= config.tokens[i].name %>
+                                </option>
+                                <% } %>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4 class="m-0 pb-lg-1">
+                            <%= i18n.from %>:
+                        </h4>
+                        <div class="mt-lg-2 row">
+                            <% for( let i=0; i < config.chains.length; i++ ) { %>
+                                <div class="col-lg mt-3 mt-lg-0">
+                                    <input type="radio" class="btn-check" data-name="<%= config.chains[i].name %>"
+                                        value="<%= config.chains[i].id %>" name="from" id="from<%= i %>" <%=i==0
+                                        ? ' checked' : '' %>/>
+                                    <label class="btn btn-radio text-primary radio-label shadow-0 w-100"
+                                        for="from<%= i %>">
+                                        <img src="./img/<%= config.chains[i].logo %>" alt="<%= config.chains[i].name %>"
+                                            class="rounded-circle" width="30" height="30">
+                                        <span class="ms-3">
+                                            <%= config.chains[i].name %>
+                                        </span>
+                                    </label>
+                                </div>
+                                <% } %>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-3 mt-lg-0">
+                        <h4 class="m-0 pb-lg-1">
+                            <%= i18n.to %>:
+                        </h4>
+                        <div class="mt-lg-2 row">
+                            <% for( let i=0; i < config.chains.length; i++ ) { %>
+                                <div class="col-lg mt-3 mt-lg-0">
+                                    <input type="radio" class="btn-check" data-name="<%= config.chains[i].name %>"
+                                        value="<%= config.chains[i].id %>" name="to" id="to<%= i %>" <%=i==1
+                                        ? ' checked' : '' %>/>
+                                    <label class="btn btn-radio text-primary radio-label shadow-0 w-100"
+                                        for="to<%= i %>">
+                                        <img src="./img/<%= config.chains[i].logo %>" alt="<%= config.chains[i].name %>"
+                                            class="rounded-circle" width="30" height="30">
+                                        <span class="ms-3">
+                                            <%= config.chains[i].name %>
+                                        </span>
+                                    </label>
+                                </div>
+                                <% } %>
+                        </div>
+                    </div>
+                    <div class="mt-3 col-12">
+                        <div class="row align-items-center">
+                            <div class="col pb-1">
+                                <h4>
+                                    <%= i18n.amount %>:
+                                </h4>
+                            </div>
+                            <div class="col-auto pb-1">
+                                <b>
+                                    <%= i18n.balance %>:
+                                </b> <span class="balance"><span id="tokenBalance">0.00000</span> <span
+                                        id="tokenSymbol"></span></span>
+                            </div>
+                        </div>
+                        <input type="number" name="amount" class="form-control shadow-0 input-2" autocomplete="off"
+                            value="0">
+                    </div>
+                </div>
+                <button class="btn btn-primary input-2 shadow-0 bg-primary mt-12" id="bridge"><i
+                        class="fas fa-exchange-alt me-3"></i><span>
+                        <%= i18n.bridge %>
+                    </span></button>
+            </div>
+        </div>
+        <div class="card shadow-sm mt-3">
+            <div class="card-body">
+                <h4 class="pb-1">
+                    <%= i18n.yourTransactions %>:
+                </h4>
+                <div id="noTransaction">
+                    <%= i18n.noTransaction %>
+                </div>
+                <div class="txTemplate d-flex d-none mb-3">
+                    <div class="d-flex flex-grow-1 p-2 align-items-center">
+                        <div class="d-flex align-items-center">
+                            <img src="./img/" alt="" class="from-img rounded-circle" width="30" height="30">
+                            <span class="ms-3 from"></span>
+                        </div>
+                        <div class="mx-4"><i class="fas fa-arrow-right"></i></div>
+                        <div class="d-flex align-items-center">
+                            <img src="./img/" alt="" class="to-img rounded-circle" width="30" height="30">
+                            <span class="ms-3 to"></span>
+                        </div>
+                        <div class="mx-4"><i class="fas fa-equals"></i></div>
+                        <span class="amount"></span>
+                        <div class="mx-4"><i class="fas fa-clock"></i></div>
+                        <span class="time"></span>
+                        <div class="flex-grow-1"></div>
+                        <a class="completed text-dark" target="_blank"><i class="fas fa-check-circle mx-4"></i><span><%= i18n.completed %></span></a>
+                        <a class="processing text-dark"><i class="fas fa-spinner mx-4"></i><span><%= i18n.processing %></span></a>
+                    </div>
+                </div>
+                <div id="transactions" class="d-none"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const i18n = <%- JSON.stringify(i18n.messages) -%>;
+        const pairs = <%- JSON.stringify(config.pairs) -%>;
+        const chains = <%- JSON.stringify(config.chains) -%>;
+        const tokens = <%- JSON.stringify(config.tokens.map(e => e.address)) -%>;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.3/web3.min.js"></script>
+    <script src="./js/abi.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

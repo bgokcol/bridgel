@@ -1,0 +1,116 @@
+* {
+    font-family: 'Jost', sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+img {
+    image-rendering: -webkit-optimize-contrast;
+}
+
+body {
+    background-color: #fcfcfc;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.radio-label {
+    text-transform: none;
+    font-size: 1rem;
+}
+
+.btn-radio {
+    background-color: #dbeafe;
+    border-radius: .5rem;
+    border: 2px solid #dbeafe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    padding: .4rem;
+}
+
+.btn-radio span {
+    text-overflow: ellipsis;
+}
+
+.btn-radio:focus, .btn-check:checked+.btn-radio {
+    background-color: #dbeafe;
+    border-color: #3b82f6;
+}
+
+.input-2 {
+    background: #dbeafe !important;
+    border: 2px solid #3b82f6 !important;
+    border-radius: 0.5rem;
+    height: calc(30px + 0.8rem);
+}
+
+.txTemplate > div {
+    border: 2px solid #dbeafe !important;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+}
+
+@media screen and (min-width: 768px) {
+    #transactions::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #F5F5F5;
+    }
+    
+    #transactions::-webkit-scrollbar {
+        width: 8px;
+        background-color: #F5F5F5;
+    }
+    
+    #transactions::-webkit-scrollbar-thumb {
+        border-radius: 30px;
+        background-color: #c5d2e4;
+    }
+}
+
+#transactions {
+    max-height: calc(5rem + 104px);
+    padding-right: 2px;
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+#transactions > div:last-of-type {
+    margin-bottom: 0 !important;
+}
+
+.input-2.bg-primary {
+    background-color: #3b82f6 !important;
+}
+
+.border-0 {
+    border: none !important;
+}
+
+.balance {
+    cursor: pointer;
+    text-decoration: underline dotted;
+}
+
+#connect span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.mt-12 {
+    margin-top: 1.2rem !important;
+}
