@@ -1,4 +1,4 @@
-# Bridgel - Centralized Bridge for EVM Chains
+# Bridgel - Centralized Bridge for Swapping Tokens Between Blockchains
 This is a centralized bridge to transfer tokens between EVM-based blockchains. It supports to charge fee in bridging transactions.
 
 ![image](https://user-images.githubusercontent.com/47295517/166823397-3ef746e9-3707-458c-85c0-a5c2987c3024.png)
